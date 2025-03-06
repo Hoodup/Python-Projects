@@ -101,11 +101,8 @@ class Backend:
         elif working_title[0] != self.month:
             nav_btns = self.driver.find_elements(By.CSS_SELECTOR, value=".headrow .nav")
             nav_btn = nav_btns[2]
-            print(nav_btn.text)
-            print(self.day, "about to trigger")
             nav_btn.click()
             time.sleep(2)
-            print('sleeping')
             self.book_a_mass1(day_num=self.day, sunday_mass=self.sundayMass, weekday_mass=self.weekdayMass.title())
 
     def book_a_mass1(self, day_num, sunday_mass, weekday_mass):
@@ -128,7 +125,6 @@ class Backend:
                 # time.sleep(3)
                 if day_to_book.text == day_num:
 
-                    print(day_num, f"vs {day_to_book.text}")
                     day_to_book.click()
                     time_of_Masses = self.driver.find_elements(By.CSS_SELECTOR, value="#mass option")
                     for n in time_of_Masses:
@@ -138,29 +134,24 @@ class Backend:
                         if time_of_mass == f"Sunday Mass - {sunday_mass}":
                             index = jacob.index(time_of_mass)
                             time_of_Masses[index].click()
-                            print("yes. na de mass")
                             check_the_date = self.driver.find_element(By.ID, value="buttoner")
                             check_the_date.click()
                             self.fill_booking_form()
                             time.sleep(1)
 
-                            print(time_of_mass)
                         elif time_of_mass == f"Weekday Mass - {weekday_mass}":
                             index = jacob.index(time_of_mass)
                             time_of_Masses[index].click()
-                            print(f"ehen na {time_of_mass} Mass")
                             check_the_date = self.driver.find_element(By.ID, value="buttoner")
                             check_the_date.click()
                             self.fill_booking_form()
                             time.sleep(1)
                     break
         elif working_title[0] != self.month:
-            print(self.day, "heading to elso")
             self.elso(day_num=self.day)
 
 
     def elso(self, day_num):
-        print(self.day, "elso")
         nav_btns = self.driver.find_elements(By.CSS_SELECTOR, value=".headrow .nav")
         print(nav_btns)
         nav_btn = nav_btns[2]
