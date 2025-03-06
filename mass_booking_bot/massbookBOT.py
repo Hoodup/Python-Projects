@@ -153,9 +153,7 @@ class Backend:
 
     def elso(self, day_num):
         nav_btns = self.driver.find_elements(By.CSS_SELECTOR, value=".headrow .nav")
-        print(nav_btns)
         nav_btn = nav_btns[2]
-        print(nav_btn.text, f"thils block want to hit {self.day}", day_num)
         nav_btn.click()
         time.sleep(1)
         self.book_a_mass1(day_num=self.day, sunday_mass=self.sundayMass, weekday_mass=self.weekdayMass.title())
@@ -169,7 +167,6 @@ class Backend:
         amount.send_keys(self.booking_amount)
         add_mass_booking = self.driver.find_element(By.ID, value="button")
         add_mass_booking.click()
-        print(f"Mass booked for {self.day}")
         self.driver.get("https://stpaulebutemetta.org/parisheasy/addmass.php?")
         self.total_masses_perSession += 1
 
@@ -182,7 +179,6 @@ class Backend:
         self.weekdayMass = weekdaymass  # "Morning"  # input("What mass during the week (Morning/evening)? ").title()
         self.booker = booker
         self.prayer = prayer
-        print(self.starting_mon, self.stopping_month, self.stop_day)
 
     # --------------------------------------------------------------------------------------------------------------------
 
